@@ -65,7 +65,6 @@ RSpec.describe 'tasks API', type: :request do
 
     context 'when the request is valid' do
       before { post '/tasks', params: valid_attributes, headers: headers }
-
       it 'creates a task' do
         expect(json['user_id']).to eq(user.id)
         expect(json['description']).to eq('description')

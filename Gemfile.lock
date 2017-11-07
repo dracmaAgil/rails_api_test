@@ -165,6 +165,7 @@ DEPENDENCIES
   faker
   jwt
   listen (>= 3.0.5, < 3.2)
+  nokogiri
   pg
   pry
   puma (~> 3.7)
