@@ -1,0 +1,13 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development: &development
+  <<: *default
+  database: sonata
+  pool: 5
+  username: dracma
+
+test:
+  <<: *development
