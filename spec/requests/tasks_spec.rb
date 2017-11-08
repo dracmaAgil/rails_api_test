@@ -57,7 +57,7 @@ RSpec.describe 'tasks API', type: :request do
       { 
         user_id: user.id,
         description: 'description',
-        website: 'example.com',
+        website: '<html><head><title><h1>foo trek</h1><h2>bar</h2></title><body><p>bar</p></body></html>',
         status: 'finished',
         expiration_date: Time.now
       }.to_json
@@ -95,7 +95,7 @@ RSpec.describe 'tasks API', type: :request do
     let(:valid_attributes) do
       { 
         description: 'description two',
-        website: 'www.shopping.com',
+        website: '<html><head><title><h1>foo trek</h1><h2>bar</h2></title><body><p>bar</p></body></html>',
         status: 'finished',
         expiration_date: Time.now
       }.to_json
@@ -122,4 +122,26 @@ RSpec.describe 'tasks API', type: :request do
       expect(response).to have_http_status(204)
     end
   end
+
+   # Test for searching tasks /tasks/
+  describe 'Get /task/' do
+    context 'searching task with description attribute' do
+      let(:valid_attributes) { { description: tasks.first.description } }
+      before { get "/tasks/search/", params: valid_attributes, headers: headers }
+      it 'search with description status code 204' do
+        expect(response).to have_http_status(204)
+      end
+
+    end
+
+    context 'searching task with website attribute' do
+      let(:valid_attributes) { { website: tasks.first.website } }
+      before { get "/tasks/search/", params: valid_attributes, headers: headers }
+      it 'search with website status 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
+  end
+
 end

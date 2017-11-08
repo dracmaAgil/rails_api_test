@@ -26,6 +26,12 @@ class TasksController < ApplicationController
     head :no_content
   end
 
+  def search
+    task = current_user.tasks.where('description = ? OR website = ?', params[:description], params[:website]).first
+    json_response(task)
+    head :no_content
+  end
+
   private
 
   def task_params
